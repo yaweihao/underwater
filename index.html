@@ -29,9 +29,9 @@
 <main class="container">
 
   <nav style="margin-bottom: 2rem;">
-    <a href="#story">Our Story</a>
-    <a href="#events">Events</a>
-    <a href="#practice">Practice Sets</a>
+    <a id="nav-story">Our Story</a>
+    <a id="nav-events">Events</a>
+    <a id="nav-practice">Practice Sets</a>
   </nav>
 
   <header id="story">
@@ -103,5 +103,22 @@
 
 </main>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  function showSection(sectionId) {
+    document.querySelectorAll('section, header').forEach(sec => sec.style.display = 'none');
+    document.getElementById(sectionId).style.display = 'block';
+  }
+
+  // Initially show only Our Story
+  showSection('story');
+
+  // Add click listeners
+  document.getElementById('nav-story').addEventListener('click', () => showSection('story'));
+  document.getElementById('nav-events').addEventListener('click', () => showSection('events'));
+  document.getElementById('nav-practice').addEventListener('click', () => showSection('practice'));
+});
+</script>
+  
 </body>
 </html>
