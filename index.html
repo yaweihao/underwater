@@ -6,9 +6,9 @@
   <title>Unplug Underwater</title>
   <style>
     :root {
-      --overlay: rgba(5, 26, 46, 0.65);
-      --text: #f6fbff;
-      --muted: rgba(246, 251, 255, 0.76);
+      --ink: rgba(246, 251, 255, 0.9);
+      --muted: rgba(246, 251, 255, 0.72);
+      --panel: rgba(3, 22, 39, 0.55);
     }
 
     * {
@@ -17,9 +17,9 @@
 
     body {
       margin: 0;
-      font-family: 'Source Sans Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: var(--text);
-      background: #02121f;
+      font-family: "Source Sans Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #010e19;
+      color: var(--ink);
     }
 
     header.hero {
@@ -28,49 +28,57 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding: clamp(2rem, 8vw, 6rem);
+      padding: clamp(2.5rem, 9vw, 6rem);
       background: url('images/underwater.png') center/cover no-repeat;
       isolation: isolate;
     }
 
-    header.hero::after {
+    header.hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(2, 24, 46, 0.78), rgba(17, 87, 150, 0.38));
+      background: linear-gradient(120deg, rgba(1, 14, 25, 0.78), rgba(8, 60, 106, 0.4));
       z-index: -1;
     }
 
     .hero-content {
-      max-width: clamp(34rem, 70vw, 48rem);
-      padding: clamp(2rem, 6vw, 4rem);
-      border-radius: 36px;
-      backdrop-filter: blur(14px);
-      background: var(--overlay);
-      box-shadow: 0 32px 60px rgba(2, 24, 46, 0.3);
+      width: min(46rem, 90vw);
+      padding: clamp(2rem, 6vw, 3.2rem);
+      border-radius: 34px;
+      background: var(--panel);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 30px 60px rgba(0, 17, 31, 0.32);
     }
 
     .hero-eyebrow {
-      letter-spacing: 0.28em;
+      display: inline-block;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      font-size: 0.88rem;
-      margin: 0 0 1rem;
+      font-size: 0.82rem;
       color: var(--muted);
+      margin-bottom: 1rem;
     }
 
     h1 {
       margin: 0 0 1.2rem;
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-size: clamp(2.3rem, 6vw, 3.4rem);
       line-height: 1.08;
+      font-weight: 500;
     }
 
-    .hero-content p {
-      margin: 0 0 1.3rem;
-      font-size: clamp(1rem, 2vw, 1.2rem);
+    .lede {
+      font-size: clamp(1.08rem, 2.2vw, 1.28rem);
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0 0 1.2rem;
+      font-size: clamp(1rem, 1.9vw, 1.15rem);
       color: var(--muted);
     }
 
-    .hero-content p:last-of-type {
+    p:last-of-type {
       margin-bottom: 0;
     }
 
@@ -82,11 +90,11 @@
 
       .hero-content {
         padding: 2rem;
-        border-radius: 28px;
+        border-radius: 26px;
       }
 
-      .hero-eyebrow {
-        letter-spacing: 0.2em;
+      h1 {
+        font-size: 2rem;
       }
     }
   </style>
@@ -97,10 +105,10 @@
     <div class="hero-content">
       <span class="hero-eyebrow">Our Story</span>
       <h1>Unplug Underwater</h1>
-      <p>I’ve always loved the water. I was 21 when I taught kids swimming for the first time. It was a hot summer in Chengdu, and I had picked up a part-time job coaching kids at a local pool. I didn’t have a plan. I just needed some spare cash. But that summer changed me.</p>
+      <p class="lede">I’ve always loved the water. I was 21 when I taught kids swimming for the first time. It was a hot summer in Chengdu, and I had picked up a part-time job coaching kids at a local pool. I didn’t have a plan. I just needed some spare cash. But that summer changed me.</p>
       <p>Some of my students were afraid of the water at first, refused to get in, cried; but slowly, something shifted. One kicked five meters; one let go of the wall; one swam the full length. I don’t remember all their names, or what drills we did on which days. But I do remember their smiles: wide, wild, impossible smiles that seemed to come out of nowhere. I remember thinking—they love swimming.</p>
       <p>I went back to school that fall. Then came graduate school. Then came the job in tech. Life moved forward. Faster. Bigger.</p>
-      <p>Years later, I am living in the U.S., working long hours at a tech company with thousands of employees. We are building amazing things. I still kept swimming, but my days were full of screens, meetings, deadlines, outcomes. Everything measurable. Everything optimized. And yet, I missed teaching. I missed watching kids go from fear to joy. In the corporate world, emotions are muted. You show less, feel less. But in the kids’ world, you have to be fully there. You celebrate. You encourage. You laugh. It's wonderful. I miss that kind of connection—the one you can’t track in metrics.</p>
+      <p>Years later, I am living in the U.S., working long hours at a tech company with thousands and thousands of employees. We are building amazing things. I still kept swimming, but my days were full of screens, meetings, deadlines, outcomes. Everything measurable. Everything optimized. And yet, I missed teaching. I missed watching kids go from fear to joy. In the corporate world, emotions are muted. You show less, feel less. But in the kids’ world, you have to be fully there. You celebrate. You encourage. You laugh. It's wonderful. I miss that kind of connection—the one you can’t track in metrics.</p>
       <p>In 2025, I started Unplug Underwater. It’s not a startup. It’s just me, sharing something I believe in with kids who are growing up in a world more distracted than ever. I want them to feel what I felt back then: the thrill of a first breath after a good lap; the quiet joy of floating still; the confidence that comes not from a grade, but from moving their body forward.</p>
       <p>Teaching swimming again, after all these years, brought something back to life in me. I still wonder about those kids I taught in Chengdu. I don’t know where they are now. But I hope, somewhere, they still remember how to swim, and the joy of being in the water.</p>
     </div>
