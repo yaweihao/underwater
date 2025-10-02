@@ -4,119 +4,378 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unplug Underwater</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css" />
   <style>
-    nav a {
-      margin-right: 1rem;
-      font-weight: bold;
+    :root {
+      --bg: #f1f8ff;
+      --text: #042438;
+      --muted: #5a6e83;
+      --accent: #1f8cff;
+      --card: #ffffff;
+      --shadow: 0 28px 60px rgba(4, 36, 56, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
       text-decoration: none;
-      color: #0077cc;
+      transition: color 0.2s ease;
     }
-    nav a:hover {
-      text-decoration: underline;
+
+    a:hover,
+    a:focus {
+      color: var(--accent);
     }
-    h2 {
-      font-size: 1.6rem;
+
+    .home-link {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      z-index: 100;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      background: rgba(12, 48, 80, 0.18);
+      color: #ffffff;
     }
-    h3 {
-      font-size: 1.2rem;
-      color: #666;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
+
+    header.hero {
+      position: relative;
+      min-height: 110vh;
+      max-height: 140vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(1.8rem, 6vw, 3.6rem) clamp(1.5rem, 9vw, 6rem) clamp(3.8rem, 12vw, 8rem);
+      background: url('images/underwater.png') center/cover no-repeat;
+      color: #f4fbff;
+      isolation: isolate;
     }
+
+    header.hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2, 24, 46, 0.82), rgba(22, 99, 173, 0.38));
+      z-index: -1;
+    }
+
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+
+    .hero-nav nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .hero-nav nav a {
+      position: relative;
+      padding-bottom: 0.4rem;
+    }
+
+    .hero-nav nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-nav nav a:hover::after,
+    .hero-nav nav a:focus::after {
+      transform: scaleX(1);
+    }
+
+    .hero-content {
+      margin-top: auto;
+      max-width: clamp(38rem, 64vw, 52rem);
+      padding: clamp(2.2rem, 6vw, 4rem);
+      border-radius: 36px;
+      backdrop-filter: blur(16px);
+      background: rgba(2, 24, 46, 0.68);
+      box-shadow: 0 32px 60px rgba(2, 24, 46, 0.28);
+    }
+
+    .hero-content h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      line-height: 1.12;
+    }
+
+    .hero-content p {
+      margin: 0 0 1.2rem;
+      font-size: clamp(1rem, 1.9vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-content p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: -6rem auto 0;
+      padding: 0 1.5rem 4rem;
+    }
+
     section {
-      display: none;
+      background: var(--card);
+      padding: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 2.5rem;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    section h2 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      margin: 0 0 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    section h3 {
+      font-size: 1.2rem;
+      margin: 1.5rem 0 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    section p {
+      margin: 0 0 1.4rem;
+    }
+
+    .section-intro {
+      margin: 0 0 1.8rem;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .story-body {
+      max-width: 62ch;
+      margin: 0 auto;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .story-body p + p {
+      margin-top: 1.3rem;
+    }
+
+    .events-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .events-grid ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(31, 140, 255, 0.08), rgba(4, 36, 56, 0.06));
+      padding: 1.5rem;
+      box-shadow: inset 0 0 0 1px rgba(4, 36, 56, 0.08);
+    }
+
+    .events-grid li {
+      margin: 0 0 0.75rem;
+      padding-left: 1.2rem;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .events-grid li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .practice-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .practice-list li {
+      padding: 1.2rem 1.4rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(31, 140, 255, 0.08), rgba(1, 52, 94, 0.05));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+    }
+
+    .practice-list span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .practice-list strong {
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem 0 3rem;
+    }
+
+    @media (max-width: 720px) {
+      .hero-nav {
+        justify-content: flex-start;
+      }
+
+      .hero-nav nav {
+        gap: 1rem;
+      }
+
+      .practice-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<a href="https://yaweihao.com" style="position: absolute; top: 1rem; left: 1rem; font-size: 1rem; color: #0077cc; text-decoration: none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">
-  &larr; Home
-</a>
+  <a class="home-link" href="https://yaweihao.com">&larr; Home</a>
 
-<main class="container">
+  <header class="hero">
+    <div class="hero-nav">
+      <nav>
+        <a href="#story">Story</a>
+        <a href="#events">Events</a>
+        <a href="#practice">Practice Sets</a>
+      </nav>
+    </div>
 
-  <nav style="margin-bottom: 2rem;">
-    <a id="nav-story">Our Story</a>
-    <a id="nav-events">Events</a>
-    <a id="nav-practice">Practice Sets</a>
-  </nav>
+    <div class="hero-content">
+      <h2>Unplug Underwater</h2>
+      <p>I’ve always loved the water. I was 21 when I taught kids swimming for the first time. One kicked five meters. One let go of the wall. One swam the full length. I don’t remember every drill, but I remember the joy.</p>
+      <p>In 2025 I started Unplug Underwater—not a startup, just me sharing the feeling of calm confidence that comes from a good lap and a deep breath.</p>
+    </div>
+  </header>
 
-  <section id="story">
-    <h1>Unplug Underwater</h1>
-    <p class="tagline">Our Story</p>
-    <p>I’ve always loved the water. I was 21 when I taught kids swimming for the first time. It was a hot summer in Chengdu, and I had picked up a part-time job coaching kids at a local pool. I didn’t have a plan. I just needed some spare cash. But that summer changed me.</p>
+  <main>
 
-    <p>Some of my students were afraid of the water at first, refused to get in, cried; But slowly, something shifted. One kicked five meters; One let go of the wall; One swam the full length... I don’t remember all their names, or what drills we did on which days. But I do remember their smiles: wide, wild, impossible smiles that seemed to come out of nowhere. I remember thinking - they love swimming.</p>
+    <section id="story">
+      <h2>Story</h2>
+      <div class="story-body">
+        <p>I’ve always loved the water. I was 21 when I taught kids swimming for the first time. It was a hot summer in Chengdu, and I had picked up a part-time job coaching kids at a local pool. I didn’t have a plan. I just needed some spare cash. But that summer changed me.</p>
 
-    <p>I went back to school that fall. Then came graduate school. Then came the job in tech. Life moved forward. Faster. Bigger.</p>
+        <p>Some of my students were afraid of the water at first, refused to get in, cried; But slowly, something shifted. One kicked five meters; One let go of the wall; One swam the full length... I don’t remember all their names, or what drills we did on which days. But I do remember their smiles: wide, wild, impossible smiles that seemed to come out of nowhere. I remember thinking – they love swimming.</p>
 
-    <p>Years later, I am living in the U.S., working long hours at a tech company with thousands and thousands of employees. We are building amazing things. I still kept swimming, but my days were full of screens, meetings, deadlines, outcomes. Everything measurable. Everything optimized. And yet, I missed teaching. I missed watching kids go from fear to joy. In the corporate world, emotions are muted. You show less, feel less. But in the kids world, you have to be fully there. You celebrate. You encourage. You laugh. It's wonderful. I miss that kind of connection, that kind of feeling - the one you can’t track in metrics.</p>
+        <p>I went back to school that fall. Then came graduate school. Then came the job in tech. Life moved forward. Faster. Bigger.</p>
 
-    <p>In 2025, I started Unplug Underwater. It’s not a startup. It’s just me, sharing something I believe in with kids who are growing up in a world more distracted than ever. I want them to feel what I felt back then: the thrill of a first breath after a good lap; the quiet joy of floating still; the confidence that comes not from a grade, but from moving their body forward.</p>
+        <p>Years later, I am living in the U.S., working long hours at a tech company with thousands and thousands of employees. We are building amazing things. I still kept swimming, but my days were full of screens, meetings, deadlines, outcomes. Everything measurable. Everything optimized. And yet, I missed teaching. I missed watching kids go from fear to joy. In the corporate world, emotions are muted. You show less, feel less. But in the kids world, you have to be fully there. You celebrate. You encourage. You laugh. It's wonderful. I miss that kind of connection, that kind of feeling – the one you can’t track in metrics.</p>
 
-    <p>Teaching swimming again, after all these years, brought something back to life in me. I still wonder about those kids I taught in Chengdu. I don’t know where they are now. But I hope, somewhere, they still remember how to swim, and the joy of being in the water.</p>    
-  </section>
-  
-  <section id="events">
-    <h2>Events</h2>
+        <p>In 2025, I started Unplug Underwater. It’s not a startup. It’s just me, sharing something I believe in with kids who are growing up in a world more distracted than ever. I want them to feel what I felt back then: the thrill of a first breath after a good lap; the quiet joy of floating still; the confidence that comes not from a grade, but from moving their body forward.</p>
 
-    <h3>Pool Meets</h3>
-    <ul>
-      <li>PNA Champs – Short Course</li>
-      <li>USMS Spring Nationals - Short Course</li>
-      <li>USMS Summer Nationals - Long Course</li>
-      <li>World Aquatics Masters Championships - Long Course<li>
-    </ul>
+        <p>Teaching swimming again, after all these years, brought something back to life in me. I still wonder about those kids I taught in Chengdu. I don’t know where they are now. But I hope, somewhere, they still remember how to swim, and the joy of being in the water.</p>
+      </div>
+    </section>
 
-    <h3>Open Water</h3>
-    <ul>
-      <li>Swim Across Columbia – Astoria, OR</li>
-      <li>Fat Salmon – Seattle, WA</li>
-      <li>Escape from Alcatraz - San Francisco, WA</li>
-      <li>Boston Sharkfest</li>
-      <li>English Channel</li>
-    </ul>
+    <section id="events">
+      <h2>Events</h2>
+      <p class="section-intro">From indoor meets to open-water crossings, here’s where we’re chasing the next lap.</p>
+      <div class="events-grid">
+        <div>
+          <h3>Pool Meets</h3>
+          <ul>
+            <li>PNA Champs – Short Course</li>
+            <li>USMS Spring Nationals – Short Course</li>
+            <li>USMS Summer Nationals – Long Course</li>
+            <li>World Aquatics Masters Championships – Long Course</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Open Water</h3>
+          <ul>
+            <li>Swim Across Columbia – Astoria, OR</li>
+            <li>Fat Salmon – Seattle, WA</li>
+            <li>Escape from Alcatraz – San Francisco, CA</li>
+            <li>Boston Sharkfest</li>
+            <li>English Channel</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <!-- You can easily add more years and events later -->
+    <section id="practice">
+      <h2>Practice Sets</h2>
+      <p class="section-intro">Benchmark sets that build stamina, focus, and the quiet joy of staying in the water longer.</p>
+      <ul class="practice-list">
+        <li>
+          <strong>100 × 100 Freestyle on 1:30</strong>
+          <span>Completed</span>
+        </li>
+        <li>
+          <strong>30 × 100 Freestyle on 1:15</strong>
+          <span>Completed</span>
+        </li>
+        <li>
+          <strong>800 Kick for Time</strong>
+          <span>In Progress</span>
+        </li>
+        <li>
+          <strong>5 × 400 Individual Medley</strong>
+          <span>In Progress</span>
+        </li>
+        <li>
+          <strong>Broken 5K (5 × 1000m Intervals)</strong>
+          <span>In Progress</span>
+        </li>
+      </ul>
+    </section>
 
-  </section>
-
-  <section id="practice">
-    <h2>Practice Sets</h2>
-    <ul>
-      <li>100 × 100 Freestyle on 1:30 ✅</li>
-      <li>30 × 100 Freestyle on 1:15 ✅</li>
-      <li>800 Kick for time ⏳</li>
-      <li>5 x 400IM ⏳</li>
-      <li>Broken 5K (5 × 1000m intervals) ⏳</li>
-    </ul>
-  </section>
+  </main>
 
   <footer>
-    <hr />
-    <p style="text-align:center">&copy; 2025 Unplug Underwater LLC. All rights reserved.</p>
+    &copy; 2025 Unplug Underwater LLC. All rights reserved.
   </footer>
 
-</main>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  function showSection(sectionId) {
-    document.querySelectorAll('section, header').forEach(sec => sec.style.display = 'none');
-    document.getElementById(sectionId).style.display = 'block';
-  }
-
-  // Initially show only Our Story
-  showSection('story');
-
-  // Add click listeners
-  document.getElementById('nav-story').addEventListener('click', () => showSection('story'));
-  document.getElementById('nav-events').addEventListener('click', () => showSection('events'));
-  document.getElementById('nav-practice').addEventListener('click', () => showSection('practice'));
-});
-</script>
-  
 </body>
 </html>
